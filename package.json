@@ -1,0 +1,27 @@
+{
+  "name": "employee-tracker",
+  "version": "1.0.0",
+  "description": "Nodejs Mysql app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/InaiaK/Employee-Tracker.git"
+  },
+  "keywords": [
+    "Backed",
+    "app"
+  ],
+  "author": "Inaia",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/InaiaK/Employee-Tracker/issues"
+  },
+  "homepage": "https://github.com/InaiaK/Employee-Tracker#readme",
+  "dependencies": {
+    "inquire": "^0.4.8",
+    "mysql2": "^2.3.3"
+  }
+}
