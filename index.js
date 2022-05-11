@@ -1,11 +1,14 @@
 const express = require('express')
 const mysql = require('mysql2')
 
-const db = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: '123942'
-})
+
+const PORT = process.env.PORT || 3000;
+express();
+
+// Express middleware
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
+
 
 // Connect to mySQL
 db.connect(err => {
@@ -14,8 +17,14 @@ db.connect(err => {
     } console.log('mySQL connected')
 })
 
-const app = express()
 
+const db = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    password: '123942'
+},
+console.log('Connected to the employeetracker_db database.')
+);
 
 
 //Create DB
@@ -30,8 +39,8 @@ app.get('/createdb', (req, res) => {
 });
 
 
-// Create table
-app.get
+
+
 
 app.listen('3000', () => {
     console.log('Server on port 3000')
@@ -40,38 +49,3 @@ app.listen('3000', () => {
 
 
 
-
-const createManager = async () => {
-    const managerQuestions = [
-        {
-            type: "input",
-            message: "Enter manager name:",
-            name: "name",
-            validate: validateInput,
-        },
-        {
-            type: "input",
-            message: "Enter employee ID:",
-            name: "id",
-            validate: validateInput,
-        },
-        {
-            type: "input",
-            message: "Enter your office number:",
-            name: "officeNumber",
-            validate: validateInput,
-        },
-
-        {
-            type: "input",
-            message: "Enter work email:",
-            name: "email",
-            validate: validateInput,
-
-        },
-    ];
-
-    const{ name,id,email,officeNumber} = await inquirer.prompt(managerQuestions);
-    const manager = new Manager(name,id,email,officeNumber);
-    employeeDB.push(manager); 
-};
