@@ -1,3 +1,5 @@
+USE employeetracker_db;
+
 INSERT INTO department (id, name)
 VALUES (),
 ;
