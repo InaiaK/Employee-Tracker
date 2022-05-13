@@ -21,6 +21,8 @@
   },
   "homepage": "https://github.com/InaiaK/Employee-Tracker#readme",
   "dependencies": {
+    "console.table": "^0.10.0",
+    "dotenv": "^16.0.1",
     "inquire": "^0.4.8",
     "mysql2": "^2.3.3"
   }
