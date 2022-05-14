@@ -20,20 +20,20 @@ db.connect(function (err) {
 
 function runPrompts() {
   inquirer.prompt({
-      type: "list",
-      name: "choice",
-      message: "What would you like to do?",
-      choices: [
-        'View all departments',
-        'View all roles',
-        'View all employees',
-        'Add a department',
-        'Add a role',
-        'Add an employee',
-        'Update an existing employee\'s role',
-        'Exit'
-      ]
-  }).then(function ({choice}) {
+    type: "list",
+    name: "choice",
+    message: "What would you like to do?",
+    choices: [
+      'View all departments',
+      'View all roles',
+      'View all employees',
+      'Add a department',
+      'Add a role',
+      'Add an employee',
+      'Update an existing employee\'s role',
+      'Exit'
+    ]
+  }).then(function ({ choice }) {
     switch (choice) {
       case 'View all departments':
         viewAllDepartments();
@@ -78,24 +78,24 @@ function viewAllDepartments() {
 }
 
 function viewAllRoles() {
-  db.query('SELECT r.title AS job_title, r.id AS role_id, d.name AS department, r.salary FROM role r LEFT JOIN department d ON r.department_id = d.id', function (err, result) {
+  db.query('SELECT r.title AS job_title, r.id AS role_id, d.department_name AS department, r.salary FROM roles r LEFT JOIN department d ON r.department_id = d.id', function (err, result) {
     if (err) {
-        console.log(err);
-      }
-      console.table(result);
-      console.log("Roles:\n");
-      runPrompts();
+      console.log(err);
+    }
+    console.table(result);
+    console.log("Roles:\n");
+    runPrompts();
   });
 }
 
 function viewAllEmployees() {
-  db.query("SELECT e.id, e.first_name, e.last_name, r.title, d.name AS department, r.salary, CONCAT(m.first_name, ' ', m.last_name) AS manager FROM employee e LEFT JOIN role r ON e.role_id = r.id LEFT JOIN department d ON d.id = r.department_id LEFT JOIN employee m ON m.id = e.manager_id", function (err, result) {
+  db.query(`select e.employee_id, concat(e.first_name,' ', e.last_name) AS 'EmployeeName', r.title,concat(m.first_name,' ', m.last_name) AS "ManagerName" FROM employee e left join roles r on r.id = e.role_id left join employee m on e.manager_id = m.employee_id;` , function (err, result) {
     if (err) {
-        console.log(err);
-      }
-      console.table(result);
-      console.log("Viewing all employees\n");
-      runPrompts();
+      console.log(err);
+    }
+    console.table(result);
+    console.log("Viewing all employees\n");
+    runPrompts();
   });
 }
 
@@ -108,7 +108,7 @@ function createDepartment() {
     message: 'What is the name of the department?'
   }).then(data => {
     console.log("Adding Department to database\n");
-    let query = `INSERT INTO department(name) VALUES('${data.departmentName}')`;
+    let query = `INSERT INTO department(department_name) VALUES('${data.departmentName}')`;
     db.query(query, function (err, result) {
       if (err) throw err;
       viewAllDepartments();
@@ -117,31 +117,31 @@ function createDepartment() {
 }
 
 function createRole() {
-      inquirer.prompt([
-        {
-          type: 'input',
-          name: "roleTitle",
-          message: "What is the name of the role?"
-        },
-        {
-          type: 'input',
-          name: "roleSalary",
-          message: "What is the salary rate?"
-        },
-        {
-          type: "input",
-          name: "roleId",
-          message: "Which department Id does the role fall in under?",
-        },
-      ]).then(data => {
-            console.log("Adding role to database\n");
-            let query = `INSERT INTO role(title,salary,department_id) VALUES('${data.roleTitle}','${data.roleSalary}','${data.roleId}')`;
-            db.query(query, function (err, result) {
-              if (err) throw err;
-              viewAllRoles();
-            });
-        });
-    }
+  inquirer.prompt([
+    {
+      type: 'input',
+      name: "roleTitle",
+      message: "What is the name of the role?"
+    },
+    {
+      type: 'input',
+      name: "roleSalary",
+      message: "What is the salary rate?"
+    },
+    {
+      type: "input",
+      name: "roleId",
+      message: "Which department Id does the role fall in under?",
+    },
+  ]).then(data => {
+    console.log("Adding role to database\n");
+    let query = `INSERT INTO role(title,salary,department_id) VALUES('${data.roleTitle}','${data.roleSalary}','${data.roleId}')`;
+    db.query(query, function (err, result) {
+      if (err) throw err;
+      viewAllRoles();
+    });
+  });
+}
 
 function createEmployee() {
   inquirer.prompt([
@@ -175,7 +175,7 @@ function createEmployee() {
   });
 }
 
-function updateEmployeeRole () {
+function updateEmployeeRole() {
   db.query("SELECT e.id, e.first_name, e.last_name, r.title, d.name AS department, r.salary, CONCAT(m.first_name, ' ', m.last_name) AS manager FROM employee e LEFT JOIN role r ON e.role_id = r.id LEFT JOIN department d ON d.id = r.department_id LEFT JOIN employee m ON m.id = e.manager_id", function (err, result) {
     if (err) {
       console.log(err);

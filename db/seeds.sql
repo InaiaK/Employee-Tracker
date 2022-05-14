@@ -1,11 +1,11 @@
 
-INSERT INTO department (name)
+INSERT INTO department (department_name)
 VALUES  ('Engineering'),
         ('Marketing'),
         ('HR'),
         ('Accounting');
 
-INSERT INTO role (title, salary, department_id)
+INSERT INTO roles (title, salary, department_id)
 VALUES  ('Lead Engineer', 120000, 1),
         ('Jr Engineer', 52000, 1),
         ('Marketing Director', 15000, 2),
@@ -16,13 +16,13 @@ VALUES  ('Lead Engineer', 120000, 1),
         ('Accountant', 95000, 4);
 
 INSERT INTO employee (first_name, last_name, role_id, manager_id)
-VALUES  ('Alice', 'DeBoer', 1, NULL),
-        ('Gabriel', 'DeBoer', 2, 1),
-        ('Dean', 'Winchester', 3, NULL),
-        ('Sammy', 'Winchester', 4, 3),
-        ('Mary', 'Winchester', 5, 3),
-        ('Adam', 'Demamp', 5, NULL),
-        ('Anders', 'Homevich', 6, 5),
-        ('Blake', 'Henderson', 7, 6),
-        ('Kyle', 'Nuvacheck', 8, NULL),
-        ('Chuck', 'Bartowski', 8, 7);
+VALUES  ('Cody', 'Martin', 1, NULL),
+        ('Inaia', 'Martin', 2, 1),
+        ('Fernando', 'Mattos', 3, NULL),
+        ('Jeane', 'Dantas', 4, 3),
+        ('Mari', 'Nascimento', 5, 3),
+        ('Ana', 'Claudia', 5, NULL),
+        ('Agatha', 'Smith', 6, 5),
+        ('Cris', 'Ripepi', 7, 6),
+        ('Georgia', 'Williams', 8, NULL),
+        ('Aline', 'Santos', 8, 7);
