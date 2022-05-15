@@ -200,7 +200,7 @@ choices: [{name:"Cody Marin",value:1},{name:"Inaia Martin ",value:2},{name:"Fern
     type:"list",
     name: "manager_id",
      message:"select manager id",
-    choices: [{name:"Cody Martin ",value:1},{name:" Fernando Matos ",value:3},{name:" Fernando Matos ",value:3}     ],
+    choices: [{name:"Aline Santos",value:7},{name:" Fernando Matos ",value:3},{name:" Inaia Martin ",value:1},{name:" Jeane Dantas",value:3} ,{name:" Cris Ripepi",value:6}, {name:" Agatha Smith",value:5}],
     
     },
 ]).then(response => {
